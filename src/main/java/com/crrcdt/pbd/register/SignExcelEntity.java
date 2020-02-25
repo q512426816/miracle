@@ -19,7 +19,7 @@ public class SignExcelEntity implements Serializable {
     /**
      * 职工编号
      */
-    private String pNumber;
+    private String pId;
 
     /**
      * 入厂时间

@@ -6,7 +6,7 @@
         select 
         t2.p_name as "pName",
         t2.p_dept as "pDept",
-        t2.p_number as "pNumber",
+        t2.p_id as "pId",
         t2.d_code as "dCode",
         date_format(t1.sign_in_time, '%Y/%m/%d %T') as "pTime"
         from pbd_sign t1

@@ -41,7 +41,7 @@ public class DownloadService {
             ee.addCell(row, i++, rownumber++);
             ee.addCell(row, i++, excelEntity.getPDept());
             ee.addCell(row, i++, excelEntity.getPName());
-            ee.addCell(row, i++, excelEntity.getPNumber());
+            ee.addCell(row, i++, excelEntity.getPId());
             ee.addCell(row, i++, excelEntity.getPTime());
             ee.addCell(row, i, excelEntity.getDCode());
         }
