@@ -46,23 +46,4 @@ public class SignController {
         return "<div style='font-size:50px;'>" + str + "</div>";
     }
 
-
-    @GetMapping("/excel/")
-    public String excel(RegisterInfo info, HttpServletRequest request) {
-        log.info("签到信息：{}", info);
-        if (info == null) {
-            return "签到失败！数据无效";
-        }
-        // 获取客户端真实IP地址
-        String ipAdre = WebUtils.getIp(request);
-        String str = "";
-        try {
-            str = service.inOrOut(info, ipAdre);
-        } catch (Exception e) {
-            str = "<div style='font-size:50px;color:red;'>" + e.getMessage() + "</div>";
-            log.error(e.getMessage(), e);
-        }
-        return "<div style='font-size:50px;'>" + str + "</div>";
-    }
-
 }

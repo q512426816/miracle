@@ -1,3 +1,6 @@
+server:
+  port: 8090
+
 spring:
   application:
     name: service-register
@@ -21,9 +24,7 @@ spring:
       test-on-borrow: false
       test-on-return: false
 
-mybatis:
-  config-location: classpath:mybatis/mybatis.cfg.xml
-  type-aliases-package: com.crrcdt.pbd.register.pojo
-  mapper-locations: classpath:mybatis/mapper/*.xml
-server:
-  port: 8090
+mybatis-plus:
+    config-location: classpath:mybatis/mybatis.cfg.xml
+    type-aliases-package: com.crrcdt.pbd.register.pojo
+    mapper-locations: classpath:mybatis/mapper/*.xml

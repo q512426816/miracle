@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.crrcdt.pbd.register.dao.DownloadMapper" >
+
+    <select id="findList" resultType="com.crrcdt.pbd.register.SignExcelEntity">
+        select 
+        t2.p_name as "pName",
+        t2.p_dept as "pDept",
+        t2.p_number as "pNumber",
+        t2.d_code as "dCode",
+        date_format(t1.sign_in_time, '%Y/%m/%d %T') as "pTime"
+        from pbd_sign t1
+        inner join pbd_register t2 on t2.id = t1.register_id
+        <where>
+            <if test="dateStr!=null and dateStr!=''">
+                date_format(t1.sign_in_time, '%Y%m%d') = #{dateStr}
+            </if>
+        </where>
+    </select>
+</mapper>
