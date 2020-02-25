@@ -17,7 +17,7 @@ import java.util.Map;
 @Slf4j
 @Service
 public class DownloadService {
-    
+
     @Autowired
     private DownloadMapper downloadMapper;
 
@@ -34,10 +34,11 @@ public class DownloadService {
         headerList.add("钉钉审批单号");
         ExportExcel ee = new ExportExcel("人员入厂信息" + dateStr, headerList);
         //正式内容第一行
+        int rownumber = 1;
         for (SignExcelEntity excelEntity : signExcelList) {
             Row row = ee.addRow();
             int i = 0;
-            ee.addCell(row, i++, i);
+            ee.addCell(row, i++, rownumber++);
             ee.addCell(row, i++, excelEntity.getPDept());
             ee.addCell(row, i++, excelEntity.getPName());
             ee.addCell(row, i++, excelEntity.getPNumber());
