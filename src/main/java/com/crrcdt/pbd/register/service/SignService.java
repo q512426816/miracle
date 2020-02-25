@@ -53,6 +53,7 @@ public class SignService extends ServiceImpl<SignMapper, SignInfo> {
         sign.setRegisterId(registerId);
         QueryWrapper<SignInfo> qw = new QueryWrapper<>();
         qw.setEntity(sign);
+        qw.orderByDesc("sign_in_time");
         return list(qw);
     }
 }

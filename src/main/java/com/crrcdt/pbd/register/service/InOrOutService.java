@@ -1,5 +1,6 @@
 package com.crrcdt.pbd.register.service;
 
+import com.crrcdt.pbd.common.utils.DateUtils;
 import com.crrcdt.pbd.register.pojo.RegisterInfo;
 import com.crrcdt.pbd.register.pojo.SignInfo;
 import lombok.extern.slf4j.Slf4j;
@@ -18,8 +19,6 @@ public class InOrOutService {
     private final RegisterService registerService;
     private final SignService signService;
 
-    private final int TIME = 3 * 60 * 1000;
-
     @Autowired
     public InOrOutService(RegisterService registerService, SignService signService) {
         this.registerService = registerService;
@@ -33,22 +32,15 @@ public class InOrOutService {
         // 1. 查询是否存在内容一致的通行信息
         RegisterInfo register = registerService.getOne(info);
         if (register != null) {
-            // 2. 若存在，则进行全部的签到信息查询 status = "10"
+            // 2. 若存在，则进行全部的签到信息查询
             List<SignInfo> allList = signService.allListByRegisterId(register.getId());
             if (!allList.isEmpty()) {
-                // 2.2 若查询到 判断是否在3分钟之内签到过
+                // 2.2 若查询到 判断是否在今日之内签到过
                 for (SignInfo signInfo : allList) {
                     Date signInDate = signInfo.getSignInTime();
-                    long nowTime = System.currentTimeMillis();
-                    long compareTime = signInDate.getTime();
-                    if (nowTime - compareTime < TIME) {
-                        // 2.2.1 若是在3分钟之内签到过 则直接返回告知短时间内不可重复扫码
-                        return "<span style='color:red;'>操作失败！3分钟内不可重复扫码！</span><br/>扫码信息：" + signInfo;
-                    } else {
-                        // 2.2.2 更新状态为离厂 update status = "60"
-                        /*signService.signOut(signInfo, ip);
-                        return "操作成功！当前状态为：【离厂】，<br/>通行证信息："
-                                + register + "<br/>扫码信息:" + signInfo;*/
+                    if (DateUtils.isSameDate(signInDate, new Date())) {
+                        // 2.2.1 若是在今日之内签到过 则直接返回告知短时间内不可重复扫码
+                        return "<span style='color:red;'>操作失败！今日不可重复扫码！</span><br/>扫码信息：" + signInfo;
                     }
                 }
             }
