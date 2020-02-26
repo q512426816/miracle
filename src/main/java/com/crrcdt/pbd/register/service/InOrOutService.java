@@ -41,7 +41,7 @@ public class InOrOutService {
                     if (DateUtils.isSameDate(signInDate, new Date())) {
                         // 2.2.1 若是在今日之内签到过 则直接返回告知短时间内不可重复扫码
                         String dateStr = DateUtils.getDateStrTime(signInDate);
-                        return "已扫码，时间：" + dateStr + "<br/>扫码信息：" + signInfo + "<br/>通行信息：" + register;
+                        return "已扫码，当前状态为：【入厂】 </br>时间：" + dateStr + "<br/>通行信息：" + register;
                     }
                 }
             }
