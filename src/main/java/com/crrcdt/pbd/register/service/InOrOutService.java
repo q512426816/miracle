@@ -26,7 +26,7 @@ public class InOrOutService {
     }
 
     public synchronized String inOrOut(RegisterInfo info, String ip) {
-        if (info == null || info.getDCode() == null) {
+        if (info == null || info.getDCode() == null || info.getDCode().length() == 0) {
             return "<div style='color:red;'>二维码内容缺失！</div>";
         }
         // 1. 查询是否存在内容一致的通行信息
@@ -41,7 +41,7 @@ public class InOrOutService {
                     if (DateUtils.isSameDate(signInDate, new Date())) {
                         // 2.2.1 若是在今日之内签到过 则直接返回告知短时间内不可重复扫码
                         String dateStr = DateUtils.getDateStrTime(signInDate);
-                        return "已扫码，当前状态为：【入厂】 </br>时间：" + dateStr + "<br/>通行信息：" + register;
+                        return "操作成功！当前状态为：【入厂】 </br>入厂时间：" + dateStr + "<br/>通行证信息：" + register;
                     }
                 }
             }
