@@ -42,7 +42,7 @@ public final class DateUtils {
      * @param date
      * @return yyyy-MM-dd的字符
      */
-    public static String getDateStrDate(Date date) {
+    public static String getDateStrTime(Date date) {
         return getDateStr(date, DATE_FORMAT);
     }
 
@@ -54,7 +54,7 @@ public final class DateUtils {
      * @return 是否相同
      */
     public static boolean isSameDate(Date date0, Date date1) {
-        return Objects.equals(getDateStrDate(date0), getDateStrDate(date1));
+        return Objects.equals(getDateStrTime(date0), getDateStrTime(date1));
     }
 
     /**

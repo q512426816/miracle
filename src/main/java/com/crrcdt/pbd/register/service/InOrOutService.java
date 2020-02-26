@@ -27,7 +27,7 @@ public class InOrOutService {
 
     public synchronized String inOrOut(RegisterInfo info, String ip) {
         if (info == null || info.getDCode() == null) {
-            return "二维码内容缺失！";
+            return "<div style='color:red;'>二维码内容缺失！</div>";
         }
         // 1. 查询是否存在内容一致的通行信息
         RegisterInfo register = registerService.getOne(info);
@@ -40,7 +40,8 @@ public class InOrOutService {
                     Date signInDate = signInfo.getSignInTime();
                     if (DateUtils.isSameDate(signInDate, new Date())) {
                         // 2.2.1 若是在今日之内签到过 则直接返回告知短时间内不可重复扫码
-                        return "<span style='color:red;'>操作失败！今日不可重复扫码！</span><br/>扫码信息：" + signInfo;
+                        String dateStr = DateUtils.getDateStrTime(signInDate);
+                        return "已扫码，时间：" + dateStr + "<br/>扫码信息：" + signInfo + "<br/>通行信息：" + register;
                     }
                 }
             }
