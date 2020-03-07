@@ -1,13 +1,14 @@
 package com.crrcdt.pbd.register.service;
 
+import com.crrcdt.pbd.common.datasource.annotation.DataSource;
+import com.crrcdt.pbd.common.datasource.enums.DataSourceType;
 import com.crrcdt.pbd.common.excel.ExportExcel;
-import com.crrcdt.pbd.register.SignExcelEntity;
+import com.crrcdt.pbd.register.pojo.SignExcelEntity;
 import com.crrcdt.pbd.register.dao.DownloadMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.ss.usermodel.Row;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -18,9 +19,14 @@ import java.util.Map;
 @Service
 public class DownloadService {
 
-    @Autowired
-    private DownloadMapper downloadMapper;
+    private final DownloadMapper downloadMapper;
 
+    @Autowired
+    public DownloadService(DownloadMapper downloadMapper) {
+        this.downloadMapper = downloadMapper;
+    }
+
+    @DataSource(DataSourceType.SLAVE1)
     public ExportExcel signExcel(String dateStr) {
         Map<String, Object> map = new HashMap<>();
         map.put("dateStr", dateStr);

@@ -1,6 +1,6 @@
 package com.crrcdt.pbd.register.dao;
 
-import com.crrcdt.pbd.register.SignExcelEntity;
+import com.crrcdt.pbd.register.pojo.SignExcelEntity;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;

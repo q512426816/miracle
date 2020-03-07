@@ -1,5 +1,7 @@
 package com.crrcdt.pbd.register.controller;
 
+import com.crrcdt.pbd.common.datasource.annotation.DataSource;
+import com.crrcdt.pbd.common.datasource.enums.DataSourceType;
 import com.crrcdt.pbd.common.utils.WebUtils;
 import com.crrcdt.pbd.register.pojo.RegisterInfo;
 import com.crrcdt.pbd.register.service.InOrOutService;
@@ -29,6 +31,7 @@ public class SignController {
     }
 
     @GetMapping("/inorout")
+    @DataSource(value = DataSourceType.MASTER)
     public String inOrOut(RegisterInfo info, HttpServletRequest request) {
         log.info("签到信息：{}", info);
         if (info == null) {

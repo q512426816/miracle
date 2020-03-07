@@ -1,4 +1,4 @@
-package com.crrcdt.pbd.register;
+package com.crrcdt.pbd.register.pojo;
 
 import lombok.Data;
 
